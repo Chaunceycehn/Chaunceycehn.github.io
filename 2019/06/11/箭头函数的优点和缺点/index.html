@@ -1,0 +1,55 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta name="generator" content="Hexo 3.8.0"><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description"><title>箭头函数的优点和缺点 | 甘柏</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/8.0.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/1.0.0/grids-responsive-min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/3.4.0/jquery.min.js"></script><link rel="icon" mask sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">箭头函数的优点和缺点</h1><a id="logo" href="/.">甘柏</a><p class="description"></p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">箭头函数的优点和缺点</h1><div class="post-meta">Jun 11, 2019<span> | </span><span class="category"><a href="/categories/js/">js</a></span><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> 阅读</span></span></div><a class="disqus-comment-count" data-disqus-identifier="2019/06/11/箭头函数的优点和缺点/" href="/2019/06/11/箭头函数的优点和缺点/#disqus_thread"></a><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头函数的优点和缺点"><span class="toc-number">1.</span> <span class="toc-text">箭头函数的优点和缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头函数和this"><span class="toc-number">2.</span> <span class="toc-text">箭头函数和this</span></a></li></ol></div></div><div class="post-content"><h3 id="箭头函数的优点和缺点"><a href="#箭头函数的优点和缺点" class="headerlink" title="箭头函数的优点和缺点"></a>箭头函数的优点和缺点</h3><p>​        <em>ES6</em>标准新增了一种新的函数：Arrow Function（<em>箭头函数</em>）</p>
+<p>​        <strong>箭头函数表达式</strong>的语法比函数表达式更简洁，并且没有自己的<code>this</code>，<code>arguments</code>，<code>supe</code>r或 <code>new.target</code>。这些函数表达式更适用于那些本来需要匿名函数的地方，并且它们不能用作构造函数。</p>
+<p>​        举个例子，<code>foo</code>和<code>bar</code>在做同样的事情。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let foo = function() &#123;</span><br><span class="line">  console.log(&apos;BAZ&apos;)</span><br><span class="line">&#125;</span><br><span class="line">let bar = () =&gt; &#123;</span><br><span class="line">  console.log(&apos;BAZ&apos;)</span><br><span class="line">&#125;</span><br><span class="line">foo() // BAZ</span><br><span class="line">bar() // BAZ</span><br></pre></td></tr></table></figure>
+<p>​        但是箭头函数不仅仅是经典函数表达式的语法糖。我们可以发现两者之间有很大的区别。这些区别使箭头功能变得非常好用，但如果不小心，这可能就变成大坑。有时箭头函数不太管用，这时候依然需要使用经典的函数表达式。</p>
+<h3 id="箭头函数和this"><a href="#箭头函数和this" class="headerlink" title="箭头函数和this"></a>箭头函数和this</h3><p>​        在经典函数表达式中，根据调用函数的上下文，<code>this</code>关键字绑定为不同的值。而箭头函数在其词法作用域内使用<code>this</code>。这导致了非常不同的行为。</p>
+<p>​        上下文和作用域有什么区别？上下文(大致)是调用函数的对象。作用域是定义函数的所有变量。一个关心它是如何被调用的，另一个关心它是如何被定义的。</p>
+<p>​        作为上下文的一个例子，定义一个对象，这个对象里有一个函数表达式方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let obj = &#123;</span><br><span class="line">  myVar: &apos;foo&apos;,</span><br><span class="line">  </span><br><span class="line">  myFunc: function() &#123;</span><br><span class="line">    console.log(this.myVar)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">obj.myFunc() // foo</span><br></pre></td></tr></table></figure>
+</div><div class="tags"><a href="/tags/js/">js</a></div><div class="post-nav"><a class="pre" href="/2019/06/13/css备忘录/">css备忘录</a><a class="next" href="/2019/06/11/从产品视角分析拼多多/">从产品视角分析拼多多</a></div><div id="disqus_thread"><div class="btn_click_load"><button class="disqus_click_btn">阅读评论（请确保 Disqus 可以正常加载）</button></div><script type="text/javascript">var disqus_config = function () {
+    this.page.url = 'http://yoursite.com/2019/06/11/箭头函数的优点和缺点/';
+    this.page.identifier = '2019/06/11/箭头函数的优点和缺点/';
+    this.page.title = '箭头函数的优点和缺点';
+  };</script><script type="text/javascript" id="disqus-lazy-load-script">$.ajax({
+url: 'https://disqus.com/next/config.json',
+timeout: 2500,
+type: 'GET',
+success: function(){
+  var d = document;
+  var s = d.createElement('script');
+  s.src = '//chauncy.disqus.com/embed.js';
+  s.setAttribute('data-timestamp', + new Date());
+  (d.head || d.body).appendChild(s);
+  $('.disqus_click_btn').css('display', 'none');
+},
+error: function() {
+  $('.disqus_click_btn').css('display', 'block');
+}
+});</script><script type="text/javascript" id="disqus-click-load">$('.btn_click_load').click(() => {  //click to load comments
+    (() => { // DON'T EDIT BELOW THIS LINE
+        var d = document;
+        var s = d.createElement('script');
+        s.src = '//chauncy.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', + new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    $('.disqus_click_btn').css('display','none');
+});</script><script type="text/javascript" id="disqus-count-script">$(function() {
+     var xhr = new XMLHttpRequest();
+     xhr.open('GET', '//disqus.com/next/config.json', true);
+     xhr.timeout = 2500;
+     xhr.onreadystatechange = function () {
+       if (xhr.readyState === 4 && xhr.status === 200) {
+         $('.post-meta .post-comments-count').show();
+         var s = document.createElement('script');
+         s.id = 'dsq-count-scr';
+         s.src = 'https://chauncy.disqus.com/count.js';
+         s.async = true;
+         (document.head || document.body).appendChild(s);
+       }
+     };
+     xhr.ontimeout = function () { xhr.abort(); };
+     xhr.send(null);
+   });
+</script></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><form class="search-form" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank"><input type="text" name="q" maxlength="20" placeholder="Search"><input type="hidden" name="sitesearch" value="http://yoursite.com"></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/css/">css</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/js/">js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/产品/">产品</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/js/" style="font-size: 15px;">js</a> <a href="/tags/产品/" style="font-size: 15px;">产品</a> <a href="/tags/css/" style="font-size: 15px;">css</a> <a href="/tags/electron/" style="font-size: 15px;">electron</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/06/13/css备忘录/">css备忘录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/11/箭头函数的优点和缺点/">箭头函数的优点和缺点</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/11/从产品视角分析拼多多/">从产品视角分析拼多多</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/11/js备忘录/">js备忘录</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/06/05/用electron制作你的第一个桌面应用/">用electron制作你的第一个桌面应用</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-comment-o"> 最近评论</i></div><script type="text/javascript" src="//chauncy.disqus.com/recent_comments_widget.js?num_items=5&amp;hide_avatars=1&amp;avatar_size=32&amp;excerpt_length=20&amp;hide_mods=1"></script></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情链接</i></div></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2019 <a href="/." rel="nofollow">甘柏.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css"><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
